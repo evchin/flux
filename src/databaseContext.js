@@ -16,5 +16,4 @@ const { container } = await client
     );
 }
 
-// export default create;
-module.exports = { create };
+export default create;
