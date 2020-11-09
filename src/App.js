@@ -1,8 +1,8 @@
 import React from 'react'
+import create from './databaseContext'
 
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 const config = require("./config");
-const dbContext = require("./databaseContext"); 
 
 class User extends React.Component {
   constructor(props) {
@@ -35,12 +35,11 @@ class User extends React.Component {
 
   render() {
     return (
-        <form autocomplete="off" onSubmit={this.handleSubmit} className="form">
+        <form autoComplete="off" onSubmit={this.handleSubmit} className="form">
           <div className="header">
             <h1>Flux</h1>
             <p>Bringing balance to power.</p>
           </div>
-          {/* <div className='control'><h2>Sign Up</h2></div> */}
           <div className='control block-cube block-input'>
             <input type="text" name="first" value={this.state.first} onChange={this.handleInputChange} placeholder="First Name"/>
             <div className='bg-top'>
@@ -118,7 +117,7 @@ async function createUser(first, last, number, region) {
     const database = client.database(databaseId);
     const container = database.container(containerId);
 
-    await dbContext.create(client, databaseId, containerId);
+    await create(client, databaseId, containerId);
 
     const newItem = {
         first: first,
