@@ -28,9 +28,13 @@ class User extends React.Component {
   }
 
   handleSubmit(event) {
-    alert ("Hey there, " + this.state.first + ". Thanks for signing up. You've just taken a step towards creating a greener future.");
-    event.preventDefault();
-    createUser(this.state.first, this.state.last, this.state.number, this.state.region);
+    if (this.state.first == "" || this.state.last == "" || this.state.number == "" || this.state.region == "") {
+      alert("Please fill out all fields.")
+      event.preventDefault();
+    } else {
+      alert ("Hey there, " + this.state.first + ". Thanks for signing up. You've just taken a step towards creating a greener future.");
+      createUser(this.state.first, this.state.last, this.state.number, this.state.region);  
+    }
   }
 
   render() {
@@ -39,6 +43,7 @@ class User extends React.Component {
           <div className="header">
             <h1>Flux</h1>
             <p>Bringing balance to power.</p>
+            <a className="about-link" href="/about.html">What is Flux?</a>
           </div>
           <div className='control block-cube block-input'>
             <input type="text" name="first" value={this.state.first} onChange={this.handleInputChange} placeholder="First Name"/>
@@ -65,7 +70,7 @@ class User extends React.Component {
             </div>
           </div>
           <div className='control block-cube block-input'>
-          <input type="text" name="number" value={this.state.number} onChange={this.handleInputChange} placeholder="Phone Number"/>
+          <input type="number" name="number" value={this.state.number} onChange={this.handleInputChange} placeholder="Phone Number"/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
