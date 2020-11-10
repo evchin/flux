@@ -4,6 +4,62 @@ import create from './databaseContext'
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 const config = require("./config");
 
+const states = ["Alaska",
+                "Alabama",
+                "Arkansas",
+                "American Samoa",
+                "Arizona",
+                "California",
+                "Colorado",
+                "Connecticut",
+                "District of Columbia",
+                "Delaware",
+                "Florida",
+                "Georgia",
+                "Guam",
+                "Hawaii",
+                "Iowa",
+                "Idaho",
+                "Illinois",
+                "Indiana",
+                "Kansas",
+                "Kentucky",
+                "Louisiana",
+                "Massachusetts",
+                "Maryland",
+                "Maine",
+                "Michigan",
+                "Minnesota",
+                "Missouri",
+                "Mississippi",
+                "Montana",
+                "North Carolina",
+                "North Dakota",
+                "Nebraska",
+                "New Hampshire",
+                "New Jersey",
+                "New Mexico",
+                "Nevada",
+                "New York",
+                "Ohio",
+                "Oklahoma",
+                "Oregon",
+                "Pennsylvania",
+                "Puerto Rico",
+                "Rhode Island",
+                "South Carolina",
+                "South Dakota",
+                "Tennessee",
+                "Texas",
+                "Utah",
+                "Virginia",
+                "Virgin Islands",
+                "Vermont",
+                "Washington",
+                "Wisconsin",
+                "West Virginia",
+                "Wyoming"]
+
 class User extends React.Component {
   constructor(props) {
     super(props);
@@ -28,12 +84,16 @@ class User extends React.Component {
   }
 
   handleSubmit(event) {
-    if (this.state.first == "" || this.state.last == "" || this.state.number == "" || this.state.region == "") {
+    if (this.state.first === "" || this.state.last === "" || this.state.number === "" || this.state.region === "") {
       alert("Please fill out all fields.")
+      event.preventDefault();
+    } else if(!states.includes(this.state.region)) {
+      alert("Please enter a valid state.")
       event.preventDefault();
     } else {
       alert ("Hey there, " + this.state.first + ". Thanks for signing up. You've just taken a step towards creating a greener future.");
-      createUser(this.state.first, this.state.last, this.state.number, this.state.region);  
+      event.preventDefault();
+      createUser(this.state.first, this.state.last, this.state.number, this.state.region);
     }
   }
 
@@ -108,8 +168,9 @@ class User extends React.Component {
             </div>
           </button>
           <div className='credits'>
-            <a href='https://codepen.io/marko-zub/' target='_blank'>Form Designer</a><br></br>
-            <a href="https://www.flaticon.com/authors/freepik" target='_blank'>Icon Credit</a>
+            <a href='https://codepen.io/marko-zub/' target='_blank' rel="noreferrer">Form Designer</a><br></br>
+            <a href="https://www.flaticon.com/authors/freepik" target='_blank' rel="noreferrer">Icon Credit</a><br></br>
+            <a href="https://images.unsplash.com/photo-1484690088595-faea13012c39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80" target='_blank' rel="noreferrer">Hero Photographer</a>
           </div>
       </form>
     );
@@ -117,26 +178,26 @@ class User extends React.Component {
 }
 
 async function createUser(first, last, number, region) {
-    var { endpoint, key, databaseId, containerId } = config;
-    const client = new CosmosClient({endpoint, key});
-    const database = client.database(databaseId);
-    const container = database.container(containerId);
+  var { endpoint, key, databaseId, containerId } = config;
+  const client = new CosmosClient({endpoint, key});
+  const database = client.database(databaseId);
+  const container = database.container(containerId);
 
-    await create(client, databaseId, containerId);
+  await create(client, databaseId, containerId);
 
-    const newItem = {
-        first: first,
-        last: last,
-        number: number,
-        region: region
-    };
+  const newItem = {
+      first: first,
+      last: last,
+      number: number,
+      region: region
+  };
 
-    try {
-        const {resource: createdItem} = await container.items.create(newItem);
-        console.log(`\r\nCreated new item: ${createdItem.first} ${createdItem.last} ${createdItem.number} ${createdItem.region}\r\n`);
-    } catch (err) {
-        console.log(err.message);
-    }
+  try {
+      const {resource: createdItem} = await container.items.create(newItem);
+      console.log(createdItem.first, createdItem.last, createdItem.number, createdItem.region)
+  } catch (err) {
+      console.log(err.message);
+  }
 }
 
 export default User;
