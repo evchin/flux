@@ -67,8 +67,10 @@ class User extends React.Component {
       first: "",
       last: "",
       number: "",
-      region: ""
+      region: "",
+      recentDemand: ""
     };
+    this.state.recentDemand = "neutral";
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -93,7 +95,7 @@ class User extends React.Component {
     } else {
       alert ("Hey there, " + this.state.first + ". Thanks for signing up. You've just taken a step towards creating a greener future.");
       event.preventDefault();
-      createUser(this.state.first, this.state.last, this.state.number, this.state.region);
+      createUser(this.state.first, this.state.last, this.state.number, this.state.region, this.state.recentDemand);
     }
   }
 
@@ -172,12 +174,13 @@ class User extends React.Component {
             <a href="https://www.flaticon.com/authors/freepik" target='_blank' rel="noreferrer">Icon Credit</a><br></br>
             <a href="https://images.unsplash.com/photo-1484690088595-faea13012c39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80" target='_blank' rel="noreferrer">Hero Photographer</a>
           </div>
+          <div className="disclaimer">* For lower 48 US states only.</div>
       </form>
     );
   }
 }
 
-async function createUser(first, last, number, region) {
+async function createUser(first, last, number, region, recentDemand) {
   var { endpoint, key, databaseId, containerId } = config;
   const client = new CosmosClient({endpoint, key});
   const database = client.database(databaseId);
@@ -189,7 +192,8 @@ async function createUser(first, last, number, region) {
       first: first,
       last: last,
       number: number,
-      region: region
+      region: region,
+      recentDemand: recentDemand
   };
 
   try {
