@@ -21,12 +21,6 @@ Flux aims to reduce a user's carbon footprint and mitigate fluctuations in deman
 5. If the demand from the previous hour is considered an outlier AND a change from the previous demand state, the Azure Function will send the message to the Twilio API.
 6. Finally, Twilio accepts the array of messages for each user and sends them to each mobile number.
 
-## Table of Contents
-
-1. Azure Cosmos Databases - Setting up the databases
-2. Azure Function - Setting up periodic text messaging 
-3. Azure Static Web Apps - Setting up the Frontend Web Application
-
 ## Setting Up Databases
 
 First, we'll use Azure Cosmos Databases to store users' names, phone numbers, and states/regions. 
@@ -42,7 +36,7 @@ First, we'll use Azure Cosmos Databases to store users' names, phone numbers, an
        "id": "1",
        "first": "YourFirstName",
        "last": "YourLastName",
-       "number": "1234567890" // this should be your actual number for testing purposes
+       "number": "1234567890", // this should be your actual number for testing purposes
        "region": "StateYouLiveIn",
        "recentDemand": "neutral"
    }
@@ -502,6 +496,7 @@ Finally, we'll create the website used to take in user information through a sim
    import React from 'react';
    import ReactDOM from 'react-dom';
    import User from './App';
+   
    ReactDOM.render(<User />, document.getElementById('root'));
    ```
 
