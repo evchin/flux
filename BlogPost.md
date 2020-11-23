@@ -583,7 +583,7 @@ To deploy your web app, follow the instructions to:
 2. [View your newly deployed website](https://docs.microsoft.com/en-us/azure/static-web-apps/getting-started?tabs=react#view-the-website)!
 
 Here's what [mine](https://flux.thearchitectsnotebook.com) looks like right now:
-![](https://github.com/thearchitectsnotebook/flux/blob/master/public/images/final-flux.PNG?raw=true)
+![](https://github.com/thearchitectsnotebook/flux/blob/master/public/images/final-flux.png?raw=true)
 
 That was a lot, but you got through it! A congratulations is in order - you're taking a tiny step towards conquering climate change.
 
