@@ -258,3 +258,9 @@ button:hover {
         font-size: 0.7rem;
     }
 }
+
+#product-hunt {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
