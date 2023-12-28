@@ -8,7 +8,7 @@ In September 2020, I was selected as one of eight students across the United Sta
 
 **Solution:** Flux aims to reduce a user's carbon footprint and mitigate fluctuations in demand by periodically informing them of their regional power grid's demand through SMS text messaging.
 
-For a little more background on the creation of Flux, see my [website](https://thearchitectsnotebook.com/flux.html).
+See a demonstration [here](https://www.youtube.com/watch?v=e782dEDRA38).
 
 
 **Important Note:** This repository does not contain the code of the actual Azure Function that powers the Flux service. This is only the React-powered frontend that receives a user's information and stores it into Azure's Cosmos DataBases.
